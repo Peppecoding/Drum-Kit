@@ -5,11 +5,13 @@ for (let i = 0; i < numberOfDrumButtons.length; i++) {
   document.querySelectorAll('.drum')[i].addEventListener('click', function () {
     let buttonInnerHTML = this.innerHTML
     makeSound(buttonInnerHTML)
+    buttonAnimation(buttonInnerHTML)
   })
 }
 // detecting keyboard press
 document.addEventListener('keypress', function (event) {
   makeSound(event.key)
+  buttonAnimation(event.key)
 })
 
 function makeSound(key) {
@@ -43,6 +45,15 @@ function makeSound(key) {
       kickBass.play()
       break
     default:
-      console.log("Not functional keyboard")
+      console.log('Not functional keyboard ')
   }
+}
+
+
+function buttonAnimation (currentkey) {
+  let activeButton = document.querySelector("." + currentkey);
+  activeButton.classList.add("pressed");
+  setTimeout(function () {
+     activeButton.classList.remove("pressed");
+  },100);
 }
